@@ -41,20 +41,34 @@ These are reference algorithms, not production-engine claims. Full metrics are i
 ## Content and licensing audit
 
 - Real secrets or credentials: NO findings. Searched `token`, `secret`, `password`, `api_key`, `access_key`, `authorization`, and private-project path/name patterns; matches were documentation terms only.
-- Current release tree: NO private filesystem paths or private-project path/name findings. Reachable Git history contains the former absolute checkout path in `a2d1b38`; that path was removed from the current tree in `1d9b13b` and does not identify the private product. Sanitize history before any public push.
+- Current release tree and sanitized `main` history: NO private filesystem paths or private-project path/name findings. The sole historical absolute path identified by the earlier audit referred to this public benchmark checkout; it was replaced by a repository-neutral label before publication. No private product or engine source was found.
 - Private product or engine source: NO findings.
 - Copyright: PASS. The corpus consists of original authored/template-derived and deterministic generated text; no third-party source passages or user recordings are included. Dataset and code licenses are separately stated.
 - Curated golden review: 210 records received row-by-row label review by one contributor; no external adjudication is claimed. See [`../docs/GOLDEN_REVIEW.md`](../docs/GOLDEN_REVIEW.md).
 - Generated `reports/failures.jsonl`: 24,526,542 bytes. Omitted from the release tree because it exceeds the 20 MB threshold and is reproducible with `csfb run --full`; `reports/results.csv` preserves all event predictions. The failure file is ignored locally.
 
+## Pre-publication history rewrite
+
+The absolute checkout path in the historical audit snapshot was replaced with `chinese-speech-follow-benchmark (public benchmark checkout)`. Only the `main` ref was rewritten. The current tree is byte-identical to the pre-rewrite tree, including all dataset files, and the frozen dataset SHA256 remains unchanged.
+
+| Original commit | Sanitized commit |
+|---|---|
+| `109bea980e9f900b6729a327fcbd944b2bc6b1ee` | `2090cc7d61e5b64238522d0428817153e1c63e8a` |
+| `1d9b13b2d8a7d1af9f7fbcd8905813a3753ef8a8` | `57c5d58999ce8d47ce01dc2c29c5c40e2e6c6bcc` |
+| `a2d1b38853d794fc6b3435687834f7b29bd2643f` | `6fb033aaf83cc4a3e5159ecba77772c6016d506a` |
+| `6004dffa2b12bbe4b0701636c8b31d9dea5a4656` | `b00391e53afa7c6826b172fe221ff209cde99d59` |
+| `8349c1b232402a53704acbe4e8edb7da55eb120d` | `29f20a469568b9ec440ee20daa505d80ea1189eb` |
+| `a645fcbcc2c81781c07bfb126a0d7675e336afef` | `cbb59126682637115a2b8a5ae35c793cabd1498c` |
+
+The original history is retained in a local backup ref and bundle only; neither is included in the public push. The complete commit map is preserved with the local release audit records.
+
 ## Publication gate
 
-- Local release cleanup and validation: PASS.
+- Local release cleanup, history scan, pytest, schema validation, and quick run: PASS after history sanitization.
 - Dataset freeze: YES; see [`../docs/CSFB_PREVIEW_FREEZE.md`](../docs/CSFB_PREVIEW_FREEZE.md).
-- Remote configured: NO.
-- GitHub owner specified: NO. Do not infer the destination from the currently authenticated CLI account.
-- History sanitization: REQUIRED before publication because an earlier commit contains the absolute public-checkout path.
-- GitHub repository created/push completed: NO.
+- GitHub destination: `wlyl123/speech-follow-benchmark`, confirmed public and empty; owner supplied by the user.
+- Remote configured: NO at this audit snapshot; the initial push is pending.
 - Hosted CI result: NOT RUN (workflow is configured, but that is not a CI pass).
+- Clean-clone test: NOT RUN; gated on a green Hosted CI run.
 - Preview tag: NOT CREATED; Hosted CI and clean-clone gates are pending.
-- Publication status: PARTIAL; local release candidate is prepared, external publication is blocked until the owner is specified and CI runs.
+- Publication status: READY FOR INITIAL PUSH; release completion still requires Hosted CI, a GitHub clean clone, and the preview tag.
