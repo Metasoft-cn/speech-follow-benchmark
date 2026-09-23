@@ -29,10 +29,20 @@ def test_duplicate_case_starts_at_annotated_occurrence():
     assert c.metadata["initial_segment_index"]==2
 
 
+def test_external_runner_receives_section_navigation_metadata():
+    from csfb.generator import jump_intent_cases
+    from csfb.runner import run_case
+    case=next(c for c in jump_intent_cases() if c.category=="section_jump")
+    command=f'"{sys.executable}" examples/echo_engine.py'
+    rows=run_case(case,"external",command)
+    assert rows[0]["expected_candidate_index"]==4
+
+
 def test_runner_rejects_out_of_range_prediction():
     c=next(c for c in golden_cases() if c.id=="golden_exact_0001")
     class Bad:
         def load_script(self,*args):pass
+        def send(self,*args):return {"segment_index":0}
         def process_event(self,event):return {"segment_index":999}
         def close(self):pass
     import csfb.runner as runner

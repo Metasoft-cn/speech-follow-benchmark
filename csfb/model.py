@@ -21,13 +21,17 @@ class Expectation:
     acceptable_segments: list[int] | None = None
     should_move: bool | None = None
     should_be_lost: bool | None = None
+    expected_state: str | None = None
+    expected_jump_status: str | None = None
+    expected_candidate_index: int | None = None
+    expected_jump_evidence: int | None = None
 
 
 @dataclass
 class Case:
     id: str
     category: str
-    script: dict[str, str]
+    script: dict[str, Any] | str
     events: list[Event]
     expectations: list[Expectation]
     metadata: dict[str, Any] = field(default_factory=dict)
@@ -35,13 +39,17 @@ class Case:
 
     def to_dict(self):
         data=asdict(self)
+        if isinstance(data["script"],str):
+            data["script"]={"id":"script_"+data["id"],"text":data["script"]}
         data["events"]=[{k:v for k,v in event.items() if v is not None} for event in data["events"]]
         data["expectations"]=[{k:v for k,v in exp.items() if v is not None or k=="expected_segment"} for exp in data["expectations"]]
         return data
 
     @classmethod
     def from_dict(cls, d):
-        return cls(d["id"], d["category"], d["script"], [Event(**e) for e in d["events"]], [Expectation(**e) for e in d["expectations"]], d.get("metadata", {}), d.get("version", 1))
+        script=d["script"]
+        if isinstance(script,str):script={"id":"script_"+d["id"],"text":script}
+        return cls(d["id"], d["category"], script, [Event(**e) for e in d["events"]], [Expectation(**e) for e in d["expectations"]], d.get("metadata", {}), d.get("version", 1))
 
 
 def read_jsonl(path):

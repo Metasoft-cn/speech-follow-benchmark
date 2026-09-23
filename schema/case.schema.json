@@ -1,1 +1,50 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"https://csfb.dev/schema/case.schema.json","title":"CSFB case","type":"object","required":["id","version","category","script","events","expectations","metadata"],"properties":{"id":{"type":"string","minLength":1},"version":{"const":1},"category":{"type":"string","minLength":1},"script":{"type":"object","required":["id","text"],"properties":{"id":{"type":"string"},"text":{"type":"string","minLength":1}},"additionalProperties":false},"events":{"type":"array","minItems":1,"items":{"$ref":"event.schema.json"}},"expectations":{"type":"array","items":{"$ref":"expectation.schema.json"}},"metadata":{"type":"object"}},"additionalProperties":false}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://csfb.dev/schema/case.schema.json",
+  "title": "CSFB case",
+  "type": "object",
+  "required": ["id", "version", "category", "script", "events", "expectations", "metadata"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "version": { "const": 1 },
+    "category": { "type": "string", "minLength": 1 },
+    "script": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        {
+          "type": "object",
+          "required": ["id", "text"],
+          "properties": {
+            "id": { "type": "string" },
+            "text": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["id", "blocks"],
+          "properties": {
+            "id": { "type": "string" },
+            "blocks": { "type": "array", "minItems": 1, "items": { "$ref": "block.schema.json" } }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "events": { "type": "array", "minItems": 1, "items": { "$ref": "event.schema.json" } },
+    "expectations": { "type": "array", "items": { "$ref": "expectation.schema.json" } },
+    "metadata": {
+      "type": "object",
+      "required": ["category", "language", "difficulty", "source", "mutation_severity"],
+      "properties": {
+        "category": { "type": "string", "minLength": 1 },
+        "language": { "type": "string", "minLength": 1 },
+        "difficulty": { "type": "string", "minLength": 1 },
+        "source": { "type": "string", "minLength": 1 },
+        "mutation_severity": { "enum": ["none", "light", "moderate", "high"] }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

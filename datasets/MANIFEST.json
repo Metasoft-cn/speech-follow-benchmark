@@ -1,29 +1,38 @@
 {
-  "dataset_version": "0.1.0",
+  "dataset_version": "0.2.0-preview",
   "seed": 20260923,
-  "generator_version": "0.1.0",
+  "generator_version": "0.2.1",
+  "case_count": 6629,
+  "event_count": 48851,
   "files": [
     {
-      "path": "datasets/golden/cases.jsonl",
-      "sha256": "ecb72000413812ff7f691446cf75f8efd8d5b41cdf01cd03942040cdb0c0f124",
+      "path": "datasets/golden/curated.jsonl",
+      "sha256": "5736b506cf3a00602936ea9af284dbe8bce97c5c7ee17a5f8f915c1771699973",
+      "case_count": 210,
+      "event_count": 370,
+      "bytes": 188035
+    },
+    {
+      "path": "datasets/golden/template_derived.jsonl",
+      "sha256": "a7ca2b3f0b1babfd5a812bcf31d40b6aad313b2f58e73da0e0b78d48e0c278f8",
       "case_count": 230,
       "event_count": 244,
-      "bytes": 114340
+      "bytes": 127060
     },
     {
       "path": "datasets/synthetic/cases.jsonl",
-      "sha256": "cc8667a8e7de06c49d0d2500742468b03b6739950352cbbf7023aead02f3fcf9",
+      "sha256": "a4b6409e428c109b2ea2374d3f0ffaec51d7c6e29eb216c945340dab993eb67d",
       "case_count": 5000,
-      "event_count": 45369,
-      "bytes": 10899431
+      "event_count": 45179,
+      "bytes": 11270590
     },
     {
       "path": "datasets/adversarial/cases.jsonl",
-      "sha256": "57c5f4ed0d336d414e74189b2bf2d0b400a2626a4c52090d50f72dde7a321177",
-      "case_count": 160,
-      "event_count": 200,
-      "bytes": 84084
+      "sha256": "84c735a9fd84043015d64a7329601d5be4b69754c4360bb96d23692af6cfe87d",
+      "case_count": 1189,
+      "event_count": 3058,
+      "bytes": 3188348
     }
   ],
-  "sha256": "a8eaa5189e8d06f1db67eafaf1c467bcd3d18f1470a2e9d4b793324e4d5f526e"
+  "sha256": "242a593739e55a02f305ffce0350425b04d5aad0ef1781d0a4190ab67195fcdf"
 }

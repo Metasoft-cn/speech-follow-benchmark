@@ -1,8 +1,12 @@
 # Release process
 
-1. Review spec, schemas, golden labels, license provenance, and all changes.
-2. Regenerate corpus; run twice and compare `datasets/MANIFEST.json` and logical predictions/metrics (ignore latency and host metadata).
-3. Run `pytest`, `csfb validate`, `csfb run --quick`, and `csfb run --full` on supported Python versions.
-4. Review category metrics and failure examples; ensure reports contain benchmark/runner versions and dataset hash.
-5. Update changelog and release checklist. Before v1.0, identify the result as a preview.
-6. Tag locally only after all gates pass. Publishing requires an explicitly configured remote and an explicit release request.
+1. Review the specification, schemas, expected labels, dataset provenance, and all diffs.
+2. Regenerate the corpus twice and compare manifests and canonical predictions/metrics, excluding timestamps, host metadata, and latency.
+3. Run unit tests, schema validation, quick benchmark, and full benchmark on supported Python versions.
+4. Review category metrics and representative failures. Preserve the pre-expansion baseline and explain changed metrics.
+5. Audit repository contents for private paths, credentials, and third-party text.
+6. Verify the configured CI workflow on the hosted repository and record the actual run URL/result.
+7. Update the changelog and release checklist. A preview is not a final v0.2.0 release.
+8. Create a final tag only after dataset, golden review, local checks, determinism, and hosted CI gates pass.
+
+This checkout has no configured Git remote, so GitHub Actions cannot be run or verified from this workspace. No final release tag is created.

@@ -16,7 +16,9 @@ class SubprocessAdapter:
         if not line:raise RuntimeError("engine closed stdout before returning a prediction")
         return json.loads(line)
 
-    def load_script(self,script_id,text,segments,initial_segment_index=0):return self.send({"type":"load_script","script_id":script_id,"text":text,"segments":[{"index":i,"text":s} for i,s in enumerate(segments)],"initial_segment_index":initial_segment_index})
+    def load_script(self,script_id,text,segments,initial_segment_index=0,sections=None):
+        entries = [item if isinstance(item, dict) else {"index": i, "text": item} for i, item in enumerate(segments)]
+        return self.send({"type":"load_script","script_id":script_id,"text":text,"segments":entries,"sections":sections or [],"initial_segment_index":initial_segment_index})
     def process_event(self,event):return self.send(event)
     def close(self):
         if self.proc.stdin:self.proc.stdin.close()
