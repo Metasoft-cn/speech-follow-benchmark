@@ -1,5 +1,6 @@
 import json
 import random
+from argparse import Namespace
 
 from csfb.baselines import GlobalExact, GlobalFuzzy, LocalFuzzy
 from csfb.generator import SEED, adversarial_cases, curated_cases, golden_cases, jump_intent_cases, synthetic_cases
@@ -106,6 +107,23 @@ def test_generators_are_deterministic():
     assert [c.to_dict() for c in synthetic_cases(30)]==[c.to_dict() for c in synthetic_cases(30)]
     assert [c.to_dict() for c in golden_cases()]==[c.to_dict() for c in golden_cases()]
     assert SEED==20260923
+
+
+def test_preview_report_does_not_overwrite_v01_baseline(tmp_path, monkeypatch):
+    from csfb import cli
+
+    monkeypatch.setattr(cli, "REPORT_PATH", tmp_path / "CSFB_V0_2_BASELINES.md")
+    cli.run(Namespace(
+        category=None,
+        case="curated_exact_001",
+        quick=False,
+        engine="global-exact",
+        engine_command=None,
+        output_dir=str(tmp_path),
+    ))
+
+    assert (tmp_path / "CSFB_V0_2_BASELINES.md").exists()
+    assert not (tmp_path / "CSFB_V0_1_BASELINES.md").exists()
 
 
 def test_golden_and_adversarial_counts_and_duplicate_examples():

@@ -263,13 +263,8 @@ def run(args):
     for name in names:
         totals = Counter(row["category"] for row in rows if row["engine"] == name and row["expected"] is not None and row["predicted"] != row["expected"])
         markdown.append(f"- **{name}:** " + ", ".join(f"{category} ({count})" for category, count in totals.most_common(8)))
-    markdown += [
-        "",
-        "`CSFB_V0_1_BASELINES.md` is retained as a compatibility artifact path; its contents report this v0.2.0-preview dataset and must not be read as v0.1 results.",
-    ]
     report_text = "\n".join(markdown) + "\n"
     REPORT_PATH.write_text(report_text, encoding="utf-8")
-    (reports / "CSFB_V0_1_BASELINES.md").write_text(report_text, encoding="utf-8")
 
 
 def main():
