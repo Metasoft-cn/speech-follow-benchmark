@@ -38,7 +38,7 @@ These are reference algorithms, not production-engine claims. Full metrics are i
 ## Content and licensing audit
 
 - Real secrets or credentials: NO findings. Searched `token`, `secret`, `password`, `api_key`, `access_key`, `authorization`, and private-project path/name patterns; matches were documentation terms only.
-- Private filesystem paths: NO findings.
+- Current release tree: NO private filesystem paths or private-project path/name findings. Reachable Git history contains the former absolute checkout path in `a2d1b38`; that path was removed from the current tree in `1d9b13b` and does not identify the private product. Sanitize history before any public push.
 - Private product or engine source: NO findings.
 - Copyright: PASS. The corpus consists of original authored/template-derived and deterministic generated text; no third-party source passages or user recordings are included. Dataset and code licenses are separately stated.
 - Generated `reports/failures.jsonl`: 24,526,542 bytes. Omitted from the release tree because it exceeds the 20 MB threshold and is reproducible with `csfb run --full`; `reports/results.csv` preserves all event predictions. The failure file is ignored locally.
@@ -49,6 +49,7 @@ These are reference algorithms, not production-engine claims. Full metrics are i
 - Dataset freeze: YES; see [`../docs/CSFB_PREVIEW_FREEZE.md`](../docs/CSFB_PREVIEW_FREEZE.md).
 - Remote configured: NO.
 - GitHub owner specified: NO. Do not infer the destination from the currently authenticated CLI account.
+- History sanitization: REQUIRED before publication because an earlier commit contains the absolute public-checkout path.
 - GitHub repository created/push completed: NO.
 - Hosted CI result: NOT RUN (workflow is configured, but that is not a CI pass).
 - Preview tag: NOT CREATED; Hosted CI and clean-clone gates are pending.
