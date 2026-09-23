@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chinese-speech-follow-benchmark"
+version = "0.1.0"
+description = "A reproducible benchmark for Chinese speech-to-script alignment"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "CSFB contributors" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9", "jsonschema>=4.22,<5"]
+
+[project.scripts]
+csfb = "csfb.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["csfb*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

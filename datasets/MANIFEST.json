@@ -1,0 +1,29 @@
+{
+  "dataset_version": "0.1.0",
+  "seed": 20260923,
+  "generator_version": "0.1.0",
+  "files": [
+    {
+      "path": "datasets/golden/cases.jsonl",
+      "sha256": "ecb72000413812ff7f691446cf75f8efd8d5b41cdf01cd03942040cdb0c0f124",
+      "case_count": 230,
+      "event_count": 244,
+      "bytes": 114340
+    },
+    {
+      "path": "datasets/synthetic/cases.jsonl",
+      "sha256": "cc8667a8e7de06c49d0d2500742468b03b6739950352cbbf7023aead02f3fcf9",
+      "case_count": 5000,
+      "event_count": 45369,
+      "bytes": 10899431
+    },
+    {
+      "path": "datasets/adversarial/cases.jsonl",
+      "sha256": "57c5f4ed0d336d414e74189b2bf2d0b400a2626a4c52090d50f72dde7a321177",
+      "case_count": 160,
+      "event_count": 200,
+      "bytes": 84084
+    }
+  ],
+  "sha256": "a8eaa5189e8d06f1db67eafaf1c467bcd3d18f1470a2e9d4b793324e4d5f526e"
+}
