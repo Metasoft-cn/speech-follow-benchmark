@@ -25,7 +25,17 @@ CSFB v0.2.0-preview evaluates recognized **text events**, not audio. It is not a
 
 ## Results
 
-See [`reports/CSFB_V0_2_BASELINES.md`](reports/CSFB_V0_2_BASELINES.md) for actual reference runs and category breakdown. Generated values are not hard-coded into this README. The three built-in baselines are simple reference algorithms, not production trackers or a leaderboard ranking.
+See [`reports/CSFB_V0_2_BASELINES.md`](reports/CSFB_V0_2_BASELINES.md) for full reference runs and category breakdown. The three built-in baselines are simple reference algorithms, not production trackers or a leaderboard ranking.
+
+The frozen v0.2.0-preview dataset has 6,629 cases and 48,851 events (SHA256 `242a593739e55a02f305ffce0350425b04d5aad0ef1781d0a4190ab67195fcdf`). On that dataset, the reference implementations measured:
+
+| Reference baseline | Final accuracy |
+|---|---:|
+| Global Exact | 90.68% |
+| Global Fuzzy | 88.96% |
+| Local Fuzzy | 90.33% |
+
+These are measured preview results, not production-system claims. See [`docs/CSFB_PREVIEW_FREEZE.md`](docs/CSFB_PREVIEW_FREEZE.md) for the freeze and reproducibility record.
 
 Their exact algorithms and thresholds are described in [`docs/BASELINES.md`](docs/BASELINES.md).
 

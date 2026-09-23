@@ -9,4 +9,6 @@
 7. Update the changelog and release checklist. A preview is not a final v0.2.0 release.
 8. Create a final tag only after dataset, golden review, local checks, determinism, and hosted CI gates pass.
 
+The v0.2.0-preview `reports/failures.jsonl` file is a generated per-error detail corpus and exceeds 20 MB. It is not committed in the preview release; `reports/results.csv` retains the per-event predictions, and `csfb run --full` recreates the failure corpus locally.
+
 This checkout has no configured Git remote, so GitHub Actions cannot be run or verified from this workspace. No final release tag is created.

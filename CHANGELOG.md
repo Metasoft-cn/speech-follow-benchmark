@@ -8,6 +8,7 @@
 - Added candidate-distance and evidence-count metrics; expanded the adversarial corpus to 1,189 cases (generator 0.2.1).
 - Added jump, false movement, duplicate occurrence, recovery, and language-stratified reporting.
 - Generator 0.2.1 makes language, category, source, difficulty, and mutation severity explicit on every case; added forgotten-word-then-skip streams and corrected false-jump accounting for unconfirmed candidates.
+- Froze the preview corpus at SHA256 `242a593739e55a02f305ffce0350425b04d5aad0ef1781d0a4190ab67195fcdf` after deterministic generation and repeated full baseline runs; see `docs/CSFB_PREVIEW_FREEZE.md`.
 - This is a preview. GitHub Actions has not yet been run against a hosted repository; no final release tag is implied.
 
 ## 0.1.0 - 2026-09-23
