@@ -9,6 +9,9 @@ The public preview dataset and its evaluation contract were frozen on 2026-09-23
 - Cases: 6,629; events: 48,851
 - Layers: 210 curated review-status, 230 template-derived, 5,000 synthetic, 1,189 adversarial
 - Dataset SHA256: `242a593739e55a02f305ffce0350425b04d5aad0ef1781d0a4190ab67195fcdf`
+- Language strata: 6,003 zh, 40 en, 586 mixed; 195 cases contain at least one skipped block
+- Navigation strata: 144 intentional skips, 120 forgotten-then-skip cases, 140 accidental future-phrase cases, 140 forgotten-word pauses
+- The 210 curated records were reviewed row by row; this is one contributor's review, not external adjudication. See [`GOLDEN_REVIEW.md`](GOLDEN_REVIEW.md).
 - Canonical segmentation: `canonical-2`
 - Code commit used for the baseline run: `1d9b13b2d8a7d1af9f7fbcd8905813a3753ef8a8`
 - Benchmark source SHA256: `9fa1002ff914def7ba225a7777ad85a5899ef65b44380ec741d72a6ca24f85fc`
@@ -24,6 +27,7 @@ This freeze covers the dataset, expected labels, canonical segmentation, metric 
 - Dataset generation: two successive generations produced the same manifest bytes and dataset SHA256.
 - Logical prediction SHA256 (latency excluded): `6d702632d943b3d8faa942b334c14859aae87bf3942478837d4b0ed4b31b2567` on both runs.
 - Logical metrics SHA256 (latency, timestamp, Python/platform metadata, and working-tree status excluded): `ebb46141d778fbc0d204d42b4baf8bb55644f91192fd4d94941edc42f0975a13` on both runs.
+- Combined logical output SHA256 (metrics, predictions, and failures; latency, timestamps, host/runtime and source identity excluded): `9a8aedbea4a3063851831fae132a3a9ea94c2998ea3aa37c85fc7fde404f00ee`; identical for both stored runs and the final full replay.
 
 | Reference baseline | Final accuracy | Within 1 | Catastrophic absolute | Wrong backward |
 |---|---:|---:|---:|---:|
