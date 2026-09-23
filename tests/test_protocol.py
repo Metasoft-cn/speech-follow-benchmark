@@ -1,5 +1,6 @@
 import json
 import sys
+import pytest
 
 from csfb.protocol import SubprocessAdapter
 from csfb.runner import run_case
@@ -26,3 +27,17 @@ def test_single_case_replay_rows():
 def test_duplicate_case_starts_at_annotated_occurrence():
     c=next(c for c in golden_cases() if c.id=="golden_duplicate_0001")
     assert c.metadata["initial_segment_index"]==2
+
+
+def test_runner_rejects_out_of_range_prediction():
+    c=next(c for c in golden_cases() if c.id=="golden_exact_0001")
+    class Bad:
+        def load_script(self,*args):pass
+        def process_event(self,event):return {"segment_index":999}
+        def close(self):pass
+    import csfb.runner as runner
+    old=runner.SubprocessAdapter;runner.SubprocessAdapter=lambda command:Bad()
+    try:
+        with pytest.raises(ValueError,match="out-of-range"):
+            runner.run_case(c,"external","bad-engine")
+    finally:runner.SubprocessAdapter=old

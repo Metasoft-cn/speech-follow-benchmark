@@ -15,7 +15,8 @@ def run_case(case,engine_name,command=None):
         engine=None
     else:
         engine=BASELINES[engine_name]();engine.load_script(case.script["text"],case.metadata.get("initial_segment_index",0));adapter=None
-    expected={x.event_index:x for x in case.expectations};rows=[];previous=0
+    expected={x.event_index:x for x in case.expectations};rows=[];previous=case.metadata.get("initial_segment_index",0)
+    segment_count=len(segment(case.script["text"]))
     try:
         for i,event in enumerate(case.events):
             obj={k:v for k,v in event.__dict__.items() if v is not None}
@@ -24,6 +25,8 @@ def run_case(case,engine_name,command=None):
             latency=(time.perf_counter_ns()-started)//1000
             if "segment_index" not in pred:raise ValueError(f"prediction at event {i} lacks segment_index")
             ex=expected.get(i);idx=int(pred["segment_index"]);confidence=pred.get("confidence")
+            if not 0<=idx<segment_count:raise ValueError(f"prediction at event {i} has out-of-range segment_index {idx} for {segment_count} segments")
+            if confidence is not None and not 0.0<=float(confidence)<=1.0:raise ValueError(f"prediction at event {i} has confidence outside [0, 1]")
             state=pred.get("state")
             if state is None:state="locked"
             if state not in ("locked","lost","recovered"):raise ValueError(f"unknown state: {state}")
