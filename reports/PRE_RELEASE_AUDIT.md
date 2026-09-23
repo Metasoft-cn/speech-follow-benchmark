@@ -4,7 +4,7 @@ Audit snapshot for the locally verified CSFB preview. No push, publication, or f
 
 ## Frozen inputs
 
-- Repository: `chinese-speech-follow-benchmark (public benchmark checkout)`
+- Repository: `chinese-speech-follow-benchmark` (public benchmark checkout)
 - Git HEAD: `faddba4b81a7635675a555fde8a85d7d511398c0`
 - Pre-expansion baseline: frozen in [`PRE_SEMANTIC_EXPANSION_BASELINE.md`](PRE_SEMANTIC_EXPANSION_BASELINE.md)
 - Benchmark: 0.2.0 preview; dataset: 0.2.0-preview; generator: 0.2.1; seed: 20260923
