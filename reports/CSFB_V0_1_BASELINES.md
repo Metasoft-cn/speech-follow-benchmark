@@ -7,14 +7,16 @@
 - Seed: 20260923
 - Generator: 0.1.0
 - Runner: 0.1.0
+- Git commit: `d3e2cca04cc058bbe1c890c8784a1ca136cca051`
+- Timestamp (UTC): 2026-09-23T03:16:47.482076+00:00
 
 These are transparent reference baselines, not production-engine claims.
 
 | Engine | Final accuracy | Within 1 | Catastrophic absolute | Wrong backward | Recovery | P95 latency (µs) |
 |---|---:|---:|---:|---:|---:|---:|
-| global-exact | 0.9216069260412817 | 0.9195331695331695 | 0.0 | 0.0 | None | 361 |
-| global-fuzzy | 0.9298949480019004 | 0.9425675675675675 | 0.0 | 0.0 | 0.0 | 5600 |
-| local-fuzzy | 0.9372855408330254 | 0.9678834678834679 | 0.0 | 0.0 | 0.0 | 684 |
+| global-exact | 0.9216069260412817 | 0.9195331695331695 | 0.0 | 0.003071253071253071 | None | 373 |
+| global-fuzzy | 0.9298949480019004 | 0.9425675675675675 | 0.0 | 0.003071253071253071 | 0.0 | 12251 |
+| local-fuzzy | 0.9372855408330254 | 0.9678834678834679 | 0.0 | 0.0 | 0.0 | 1489 |
 
 ## Failure categories
 
